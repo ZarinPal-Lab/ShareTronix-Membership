@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>حق عضویت شیرترانیکس 09130246374</title>
+<style>
+body , html{
+margin: 0px;
+	padding:0px;
+	color: #000;
+	font-family: tahoma, Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	text-decoration: none;
+ width:100%;
+
+	position:relative;
+
+	background-color: #c0deed;
+
+
+height:100%;
+}
+#main{
+width:900px;
+
+padding:10px;
+margin:0px auto;
+background:#fff;
+color:#000;
+overflow:visible;
+	position:relative;
+	direction:rtl;
+}
+code{
+direction:ltr;
+txt-align:left;
+padding:10px;
+border:dotted 2px #999999;
+background:#dbdedc;
+margin:20px;
+display:inline-block;
+max-height:300px;
+overflow:auto;
+width:95%;
+}
+</style>
+</head>
+
+<body>
+
+<div id="main">
+
+<div style="color:red;font-weight:bold">
+فایل زیپ را در روت باز کنید و توجه کنید در پوشه themes حتما yourtheme را به نام قالب خود تغییر دهید
+</div>
+
+<br><br>
+1- در phpmyadmin در برگه sql کد زیر را اجرا کنید <br>
+
+<code>
+ALTER TABLE  `users` ADD  `pay_for_signup` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT  '0' AFTER  `is_network_admin`
+</code><br>
+2 - به فایل system/classes/class_page.php برید و کد زیر را بیابید.<br>
+<code>
+require_once( $this->controllers.implode('_',$this->request).'.php' );
+</code>
+3- قبل از آن کد زیر را اضافه کنید
+
+<code>
+			
+			if($user->is_logged){<br>
+			if($this->request[0] !== "pay-for-signup" && !$this->user->info->pay_for_signup &&  $this->request[0] !== "signout" ){<br>
+			$this->redirect('pay-for-signup');<br>
+	<br>
+			exit;<br>
+			}<br>
+			}<br>
+</code>
+
+6- کاربر در صورت عدم پرداخت به صفحه http://site.com/pay-for-signup هدایت میشود
+
+
+
+
+</div>
+</body>
+</html>
